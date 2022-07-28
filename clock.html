@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="clockBox">
+        <div class="analogClock">
+            <div class="clockC clr-rose" id="sc"><span><i></i><i></i></span></div>
+            <div class="clockC clockC2 clr-lavender" id="mn"><span><i></i><i></i></span></div>
+            <div class="clockC clockC3 clr-leaf" id="hr"><span><i></i><i></i></span></div>
+            <span style="--deg:1;">I</span>
+            <span style="--deg:2;">II</span>
+            <span style="--deg:3;">III</span>
+            <span style="--deg:4;">IV</span>
+            <span style="--deg:5;">V</span>
+            <span style="--deg:6;">VI</span>
+            <span style="--deg:7;">VII</span>
+            <span style="--deg:8;">VIII</span>
+            <span style="--deg:9;">IX</span>
+            <span style="--deg:10;">X</span>
+            <span style="--deg:11;">XI</span>
+            <span style="--deg:12;">XII</span>
+        </div>
+        <div class="digitalClock">
+            <div id="digHr" class="clr-leaf">89</div>
+            <div class="semicolon">:</div>
+            <div id="digMn" class="clr-lavender">09</div>
+            <div class="semicolon">:</div>
+            <div id="digSc" class="clr-rose">90</div>
+            <div id="meridian"></div>
+        </div>
+    </div>
+
+    <script>
+        var hr=document.getElementById('hr');
+        var mn=document.getElementById('mn');
+        var sc=document.getElementById('sc');
+        var digHr=document.getElementById('digHr');
+        var digMn=document.getElementById('digMn');
+        var digSc=document.getElementById('digSc');
+        var meridian=document.getElementById('meridian');
+        setInterval(()=>{
+            d=new Date();
+            tempHr=d.getHours();
+            tempMeridian='';
+            minutes=d.getMinutes();
+            seconds=d.getSeconds();
+            if(tempHr>=12)
+            {
+                tempMeridian="PM";
+            }
+            else{
+                tempMeridian="AM";
+            }
+            if(tempHr>=13)
+            {
+                tempHr=tempHr-12;
+            }
+            hr.style.transform="rotate("+(tempHr+minutes/60)*30+"deg)";
+            mn.style.transform="rotate("+(minutes+seconds/60)*6+"deg)";
+            sc.style.transform="rotate("+seconds*6+"deg)";
+            digHr.innerHTML=tempHr;
+            digMn.innerHTML=minutes;
+            digSc.innerHTML=seconds;
+            meridian.innerHTML=tempMeridian;
+        });
+    </script>
+</body>
+</html>
